@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft
+Comment=Minecraft: MCPE Launcher
+Exec=snap run mcpe
+Icon=${SNAP}/meta/gui/mcpelauncher-icon-512.png
+Categories=Games
+Name[it_IT]=mcpe.desktop

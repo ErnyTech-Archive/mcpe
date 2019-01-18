@@ -1,0 +1,88 @@
+name: mcpe
+summary: "Minecraft: MCPE Launcher"
+description: |
+  This is my-awesome-app's description. You have a paragraph or two to tell
+  the most important story about your snap. Keep it under 100 words though,
+  we live in tweetspace and your description wants to look good in the snap
+  store.
+
+icon: snap/gui/mcpelauncher-icon-512.png
+version: determined-by-version-script
+version-script: git -C parts/my-app-part/src describe --always --dirty --tags
+confinement: strict
+grade: stable
+base: core18
+
+apps:
+  mcpe:
+    command: bin/desktop-launch $SNAP/usr/bin/mcpelauncher-ui-qt
+    desktop: share/applications/mcpe.desktop
+    plugs:
+      - desktop
+      - desktop-legacy
+      - x11
+      - unity7
+      - wayland
+      - home
+      - network 
+
+parts:
+  desktop-qt5:
+
+  mcpe-desktop:
+    plugin: dump
+    source: snap/gui
+    organize:
+      mcpe.desktop: share/applications/mcpe.desktop
+
+  mcpe:
+    plugin: cmake
+    source-type: git
+    source: https://github.com/minecraft-linux/mcpelauncher-ui-manifest.git
+    configflags: 
+      - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
+      - "-DCMAKE_BUILD_TYPE=Release"
+      - "-DGAME_LAUNCHER_PATH=/snap/mcpe/current/usr/bin"
+    build-packages:
+      - cmake
+      - pkg-config
+      - g++-multilib
+      - libssl-dev 
+      - libcurl4-openssl-dev 
+      - libuv1-dev 
+      - libzip-dev 
+      - libprotobuf-dev 
+      - protobuf-compiler 
+      - qtbase5-dev
+      - qtwebengine5-dev
+      - qtdeclarative5-dev
+      - libqt5svg5-dev
+      - qml-module-qtquick2
+      - qml-module-qtquick-layouts
+      - qml-module-qtquick-controls
+      - qml-module-qtquick-controls2
+      - qml-module-qtquick-window2
+      - qml-module-qtquick-dialogs
+      - qml-module-qt-labs-settings
+      - qml-module-qt-labs-folderlistmodel
+
+  mcpelauncher-client:
+    plugin: cmake
+    source-type: git
+    source: https://github.com/minecraft-linux/mcpelauncher-manifest.git
+    configflags: 
+      - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
+      - "-DCMAKE_BUILD_TYPE=Release"
+      - "-DENABLE_DEV_PATHS=OFF"
+    build-packages:
+      - cmake
+      - pkg-config
+      - g++-multilib
+      - libpng-dev:i386
+      - libx11-dev:i386
+      - libxi-dev:i386 
+      - libcurl4-openssl-dev:i386 
+      - libudev-dev:i386 
+      - libevdev-dev:i386 
+      - libegl1-mesa-dev:i386 
+      - libasound2:i386
