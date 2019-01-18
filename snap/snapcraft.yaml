@@ -83,7 +83,6 @@ parts:
       - g++-multilib
       - libpng-dev:i386
       - libx11-dev:i386
-      - libxi-dev:i386 
       - libcurl4-openssl-dev:i386 
       - libudev-dev:i386 
       - libevdev-dev:i386 
