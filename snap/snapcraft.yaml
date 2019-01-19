@@ -38,6 +38,7 @@ parts:
       if [ "$(uname -m)" = "x86_64" ]; then
         dpkg --add-architecture i386
       fi
+      apt-get install -yqq software-properties-common
       add-apt-repository ppa:beineri/opt-qt596-xenial -y
       apt-get update
       apt-get install -yqq git cmake pkg-config
