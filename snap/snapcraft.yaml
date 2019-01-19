@@ -41,6 +41,7 @@ parts:
       apt-get install -yqq software-properties-common
       add-apt-repository ppa:beineri/opt-qt596-xenial -y
       apt-get update
+      apt upgrade -yy
       apt-get install -yqq apt-utils
       apt-get install -yqq git cmake pkg-config 
       apt-get install -yqq libssl-dev libcurl4-openssl-dev qt59base qt59webengine
