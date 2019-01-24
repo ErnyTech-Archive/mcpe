@@ -68,6 +68,7 @@ parts:
       - protobuf-compiler 
       - qt5-default
       - qtwebengine5-dev
+      - libqt5svg5-dev
     after: [add-architecture]
 
   mcpelauncher-client:
