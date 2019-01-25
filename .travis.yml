@@ -1,0 +1,11 @@
+dist: xenial
+language: shell
+
+addons:
+  snaps:
+  - name: snapcraft
+    classic: true
+    
+script:
+  - /snap/bin/snapcraft clean
+  - travis_wait 50 /snap/bin/snapcraft --target-arch amd64
