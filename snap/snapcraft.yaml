@@ -61,7 +61,6 @@ parts:
       - pkg-config
       - g++-multilib
       - libssl-dev 
-      - libcurl4-openssl-dev 
       - libuv1-dev 
       - libzip-dev 
       - libprotobuf-dev 
@@ -79,6 +78,7 @@ parts:
       - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DENABLE_DEV_PATHS=OFF"
+      - "-DUSE_OWN_CURL=ON"
     build-packages:
       - cmake
       - pkg-config
