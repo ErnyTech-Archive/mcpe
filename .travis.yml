@@ -7,6 +7,6 @@ addons:
     classic: true
     
 script:
-  - apt update
+  - sudo apt update
   - /snap/bin/snapcraft clean
   - travis_wait 50 /snap/bin/snapcraft --target-arch amd64
