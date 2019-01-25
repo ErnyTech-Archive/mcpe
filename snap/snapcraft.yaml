@@ -58,7 +58,6 @@ parts:
       - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DENABLE_DEV_PATHS=OFF"
-      - "-DUSE_OWN_CURL=ON"
     after: [pkgdeps]
     
   mcpe:
