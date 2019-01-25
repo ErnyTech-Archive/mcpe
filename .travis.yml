@@ -9,8 +9,6 @@ addons:
 script:
   - while sleep 5m; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
   - echo $SNAP_TOKEN | snapcraft login --with -
-  - echo $SNAP_TOKEN
-  - /snap/bin/snapcraft login --with snapcraft-login
   - sudo apt update
   - /snap/bin/snapcraft clean
   - /snap/bin/snapcraft --target-arch amd64
