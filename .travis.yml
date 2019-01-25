@@ -7,6 +7,7 @@ addons:
     classic: true
     
 script:
+  - while sleep 5m; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
   - sudo apt update
   - /snap/bin/snapcraft clean
-  - travis_wait 50 /snap/bin/snapcraft --target-arch amd64
+  - /snap/bin/snapcraft --target-arch amd64
