@@ -48,17 +48,7 @@ parts:
     source: snap/gui
     organize:
       mcpe.desktop: share/applications/mcpe.desktop
-
-  mcpe:
-    plugin: cmake
-    source-type: git
-    source: https://github.com/minecraft-linux/mcpelauncher-ui-manifest.git
-    configflags: 
-      - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
-      - "-DCMAKE_BUILD_TYPE=Release"
-      - "-DGAME_LAUNCHER_PATH=/snap/mcpe/current/usr/bin"
-    after: [pkgdeps]
-
+    
   mcpelauncher-client:
     plugin: cmake
     source-type: git
@@ -69,3 +59,13 @@ parts:
       - "-DENABLE_DEV_PATHS=OFF"
       - "-DUSE_OWN_CURL=ON"
     after: [pkgdeps]
+    
+  mcpe:
+    plugin: cmake
+    source-type: git
+    source: https://github.com/minecraft-linux/mcpelauncher-ui-manifest.git
+    configflags: 
+      - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
+      - "-DCMAKE_BUILD_TYPE=Release"
+      - "-DGAME_LAUNCHER_PATH=/snap/mcpe/current/usr/bin"
+    after: [mcpelauncher-client]
