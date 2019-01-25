@@ -5,6 +5,9 @@ addons:
   snaps:
   - name: snapcraft
     classic: true
+  - name: multipass
+    classic: true
+    channel: beta
     
 script:
   - /snap/bin/snapcraft clean
