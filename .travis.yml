@@ -8,8 +8,8 @@ addons:
     
 script:
   - while sleep 5m; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
-  - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snapcraft-login
-  - echo $SNAPCRAFT_LOGIN_FILE
+  - echo $SNAP_TOKEN | snapcraft login --with -
+  - echo $SNAP_TOKEN
   - /snap/bin/snapcraft login --with snapcraft-login
   - sudo apt update
   - /snap/bin/snapcraft clean
