@@ -31,16 +31,17 @@ apps:
 parts:
   desktop-qt5:
 
-  add-architecture:
+  pkgdeps:
     plugin: nil
-    prepare: |
-      if [ "$(uname -m)" = "x86_64" ]; then
-        dpkg --add-architecture i386
-      fi
+    override-build: |
+      dpkg --add-architecture i386
       add-apt-repository ppa:beineri/opt-qt596-xenial -y
       apt-get update
       apt upgrade -yy
+      apt-get install -y git cmake pkg-config
+      apt-get install -y g++-multilib
       apt-get install -y qt59base qt59declarative qt59quickcontrols qt59quickcontrols2 qt59webengine libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
+      apt-get install -y libssl-dev libcurl4-openssl-dev libuv1-dev libzip-dev libprotobuf-dev protobuf-compiler
   
   mcpe-desktop:
     plugin: dump
@@ -56,16 +57,7 @@ parts:
       - "-DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr"
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DGAME_LAUNCHER_PATH=/snap/mcpe/current/usr/bin"
-    build-packages:
-      - cmake
-      - pkg-config
-      - g++-multilib
-      - libssl-dev 
-      - libuv1-dev 
-      - libzip-dev 
-      - libprotobuf-dev 
-      - protobuf-compiler 
-    after: [add-architecture]
+    after: [pkgdeps]
 
   mcpelauncher-client:
     plugin: cmake
@@ -76,8 +68,4 @@ parts:
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DENABLE_DEV_PATHS=OFF"
       - "-DUSE_OWN_CURL=ON"
-    build-packages:
-      - cmake
-      - pkg-config
-      - g++-multilib
-    after: [add-architecture]
+    after: [pkgdeps]
