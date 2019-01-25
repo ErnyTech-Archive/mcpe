@@ -8,7 +8,7 @@ description: |
 
 icon: snap/gui/mcpelauncher-icon-512.png
 version: determined-by-version-script
-version-script: git -C parts/my-app-part/src describe --always --dirty --tags
+version-script: git -C parts/mcpelauncher-client/src describe --always --dirty --tags
 confinement: strict
 grade: stable
 architectures:
@@ -34,14 +34,16 @@ parts:
   pkgdeps:
     plugin: nil
     override-build: |
-      sudo dpkg --add-architecture i386
-      sudo add-apt-repository ppa:beineri/opt-qt596-xenial -y
-      sudo apt-get update
-      sudo apt upgrade -yy
-      sudo apt-get install -y git cmake pkg-config
-      sudo apt-get install -y g++-multilib 
-      sudo apt-get install -y qt59base qt59declarative qt59quickcontrols qt59quickcontrols2 qt59webengine qt59svg libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
-      sudo apt-get install -y libssl-dev libcurl4-openssl-dev:i386 libuv1-dev libzip-dev libprotobuf-dev protobuf-compiler
+      dpkg --add-architecture i386
+      add-apt-repository ppa:beineri/opt-qt596-xenial -y
+      apt update
+      apt upgrade -yy
+      apt-get install -y git cmake pkg-config
+      apt install -y g++-multilib 
+      apt install -y qt59base qt59declarative qt59quickcontrols qt59quickcontrols2 qt59webengine qt59svg libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
+      apt install -y libssl-dev libcurl4-openssl-dev:i386 libuv1-dev libzip-dev libprotobuf-dev protobuf-compiler
+    build-packages:
+      - software-properties-common
   
   mcpe-desktop:
     plugin: dump
