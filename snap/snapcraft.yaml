@@ -37,9 +37,10 @@ parts:
       if [ "$(uname -m)" = "x86_64" ]; then
         dpkg --add-architecture i386
       fi
+      add-apt-repository ppa:beineri/opt-qt596-xenial -y
       apt-get update
       apt upgrade -yy
-      apt-get install -y libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
+      apt-get install -y qt59base qt59declarative qt59quickcontrols qt59quickcontrols2 qt59webengine libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
   
   mcpe-desktop:
     plugin: dump
@@ -64,9 +65,6 @@ parts:
       - libzip-dev 
       - libprotobuf-dev 
       - protobuf-compiler 
-      - qt5-default
-      - qtwebengine5-dev
-      - libqt5svg5-dev
     after: [add-architecture]
 
   mcpelauncher-client:
