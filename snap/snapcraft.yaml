@@ -55,6 +55,8 @@ parts:
     configflags: 
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DENABLE_DEV_PATHS=OFF"
+    organize:
+      bin: usr/bin
     after: [pkgdeps]
     
   mcpe:
@@ -68,4 +70,6 @@ parts:
       sudo apt-get remove -y libcurl4-openssl-dev:i386
       sudo apt-get install -y libcurl4-openssl-dev
       snapcraftctl pull
+    organize:
+      bin: usr/bin   
     after: [mcpelauncher-client]
