@@ -57,6 +57,8 @@ parts:
       - "-DENABLE_DEV_PATHS=OFF"
     organize:
       bin: usr/bin
+    stage-packages:
+      - libqt5webenginewidgets5
     after: [pkgdeps]
     
   mcpe:
