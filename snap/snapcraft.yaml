@@ -58,7 +58,7 @@ parts:
     organize:
       bin: usr/bin
     stage-packages:
-      - libqt5webenginewidgets5
+      - qt59webengine
     after: [pkgdeps]
     
   mcpe:
