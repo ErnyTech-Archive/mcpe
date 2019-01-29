@@ -32,12 +32,11 @@ parts:
     plugin: nil
     override-build: |
       sudo dpkg --add-architecture i386
-      sudo add-apt-repository ppa:beineri/opt-qt596-xenial -y
       sudo apt update
       sudo apt upgrade -yy
       sudo apt-get install -y git cmake pkg-config
       sudo apt install -y g++-multilib 
-      sudo apt install -y qt59base qt59declarative qt59quickcontrols qt59quickcontrols2 qt59webengine qt59svg libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
+      sudo apt install -y libpng-dev:i386 libx11-dev:i386 libxi-dev:i386 libudev-dev:i386 libevdev-dev:i386 libegl1-mesa-dev:i386 libmirclient-dev:i386 libmircommon-dev:i386 libxkbcommon-dev:i386 libasound2:i386
       sudo apt install -y libssl-dev libcurl4-openssl-dev:i386 libuv1-dev libzip-dev libprotobuf-dev protobuf-compiler
     build-packages:
       - software-properties-common
@@ -55,6 +54,10 @@ parts:
     configflags: 
       - "-DCMAKE_BUILD_TYPE=Release"
       - "-DENABLE_DEV_PATHS=OFF"
+      - "-DQT_ROOT_DIR=$SNAPCRAFT_STAGE/qt"
+      - "-DQT_QMAKE_EXECUTABLE=$SNAPCRAFT_STAGE/qt/bin/qmake"
+      - "-DQt5Core_DIR=$SNAPCRAFT_STAGE/qt/lib/cmake/Qt5Core"
+      - "-DQt5_DIR=$SNAPCRAFT_STAGE/qt/lib/cmake/Qt5"
     organize:
       bin: usr/bin
     stage-packages:
@@ -75,3 +78,47 @@ parts:
     organize:
       bin: usr/bin   
     after: [mcpelauncher-client]
+
+  qt:
+    plugin: qtbuilder
+    qt-source-git: https://code.qt.io/qt/qt5.git
+    qt-submodules: ['qtbase', 'qtdeclarative', 'qtquickcontrols', 'qtquickcontrols2', 'qtwebengine']
+    build-packages:
+      - libasound2-dev
+      - libdbusmenu-glib-dev
+      - libffi-dev
+      - liblzma-dev
+      - libpulse-dev
+      - libssl-dev
+      - libx11-xcb-dev
+      - libxcb-icccm4-dev
+      - libxcb-image0-dev
+      - libxcb-keysyms1-dev
+      - libxcb-randr0-dev
+      - libxcb-render-util0-dev
+      - libxcb-sync-dev
+      - libxcb-util0-dev
+      - libxcb-xfixes0-dev
+      - libxcb1-dev
+      - libxrender-dev
+    configflags:
+      - -prefix
+      - $SNAPCRAFT_STAGE/qt
+      - -release
+      - -force-debug-info
+      - -opensource
+      - -confirm-license
+      - -qt-zlib
+      - -qt-libpng
+      - -qt-freetype
+      - -qt-harfbuzz
+      - -qt-pcre
+      - -no-opengl
+      - -static
+      - -openssl-linked
+      - -no-mirclient
+      - -nomake
+      - examples
+      - -nomake
+      - tests
+    prime: [-./*]
