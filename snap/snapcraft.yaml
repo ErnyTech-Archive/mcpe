@@ -62,7 +62,7 @@ parts:
       bin: usr/bin
     stage-packages:
       - qt59webengine
-    after: [pkgdeps]
+    after: [pkgdeps, qt]
     
   mcpe:
     plugin: cmake
